@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -73,7 +74,7 @@ public class SortedCopyBenchmark {
     checkArgument(size > 0, "empty collection not supported");
     Set<Integer> set = new LinkedHashSet<>(size);
 
-    Random random = new Random();
+    Random random = new SecureRandom();
     while (set.size() < size) {
       set.add(random.nextInt());
     }

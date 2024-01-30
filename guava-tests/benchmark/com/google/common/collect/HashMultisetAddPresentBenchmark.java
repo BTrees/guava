@@ -16,6 +16,7 @@ package com.google.common.collect;
 
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,7 +34,7 @@ public class HashMultisetAddPresentBenchmark {
 
   @BeforeExperiment
   void setUp() {
-    Random random = new Random();
+    Random random = new SecureRandom();
     multisets.clear();
     for (int i = 0; i < ARRAY_SIZE; i++) {
       HashMultiset<Integer> multiset = HashMultiset.<Integer>create();
