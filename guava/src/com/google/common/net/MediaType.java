@@ -867,7 +867,7 @@ public final class MediaType {
     }
     MediaType mediaType = new MediaType(type, subtype, builder.build());
     // if the attribute isn't charset, we can just inherit the current parsedCharset
-    if (!normalizedAttribute.equals(CHARSET_ATTRIBUTE)) {
+    if (!CHARSET_ATTRIBUTE.equals(normalizedAttribute)) {
       mediaType.parsedCharset = this.parsedCharset;
     }
     // Return one of the constants if the media type is a known type.
@@ -938,8 +938,8 @@ public final class MediaType {
    * charset=UTF-8"}.
    */
   public boolean is(MediaType mediaTypeRange) {
-    return (mediaTypeRange.type.equals(WILDCARD) || mediaTypeRange.type.equals(this.type))
-        && (mediaTypeRange.subtype.equals(WILDCARD) || mediaTypeRange.subtype.equals(this.subtype))
+    return (WILDCARD.equals(mediaTypeRange.type) || mediaTypeRange.type.equals(this.type))
+        && (WILDCARD.equals(mediaTypeRange.subtype) || mediaTypeRange.subtype.equals(this.subtype))
         && this.parameters.entries().containsAll(mediaTypeRange.parameters.entries());
   }
 

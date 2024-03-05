@@ -18,6 +18,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.StandardSystemProperty.JAVA_CLASS_PATH;
 import static com.google.common.base.StandardSystemProperty.PATH_SEPARATOR;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static java.util.logging.Level.WARNING;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -495,7 +497,7 @@ public final class ClassPath {
       Enumeration<JarEntry> entries = file.entries();
       while (entries.hasMoreElements()) {
         JarEntry entry = entries.nextElement();
-        if (entry.isDirectory() || entry.getName().equals(JarFile.MANIFEST_NAME)) {
+        if (entry.isDirectory() || JarFile.MANIFEST_NAME.equals(entry.getName())) {
           continue;
         }
         builder.add(ResourceInfo.of(new File(file.getName()), entry.getName(), classloader));
@@ -542,7 +544,7 @@ public final class ClassPath {
           }
         } else {
           String resourceName = packagePrefix + name;
-          if (!resourceName.equals(JarFile.MANIFEST_NAME)) {
+          if (!JarFile.MANIFEST_NAME.equals(resourceName)) {
             builder.add(ResourceInfo.of(f, resourceName, classloader));
           }
         }
@@ -595,7 +597,7 @@ public final class ClassPath {
           logger.warning("Invalid Class-Path entry: " + path);
           continue;
         }
-        if (url.getProtocol().equals("file")) {
+        if ("file".equals(url.getProtocol())) {
           builder.add(toFile(url));
         }
       }
@@ -612,7 +614,7 @@ public final class ClassPath {
       entries.putAll(getClassPathEntries(parent));
     }
     for (URL url : getClassLoaderUrls(classloader)) {
-      if (url.getProtocol().equals("file")) {
+      if ("file".equals(url.getProtocol())) {
         File file = toFile(url);
         if (!entries.containsKey(file)) {
           entries.put(file, classloader);
@@ -644,7 +646,7 @@ public final class ClassPath {
         try {
           urls.add(new File(entry).toURI().toURL());
         } catch (SecurityException e) { // File.toURI checks to see if the file is a directory
-          urls.add(new URL("file", null, new File(entry).getAbsolutePath()));
+          urls.add(Urls.create("file", null, new File(entry).getAbsolutePath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
         }
       } catch (MalformedURLException e) {
         logger.log(WARNING, "malformed classpath entry: " + entry, e);
@@ -661,7 +663,7 @@ public final class ClassPath {
    */
   @VisibleForTesting
   static URL getClassPathEntry(File jarFile, String path) throws MalformedURLException {
-    return new URL(jarFile.toURI().toURL(), path);
+    return Urls.create(jarFile.toURI().toURL(), path, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
   }
 
   @VisibleForTesting
@@ -673,7 +675,7 @@ public final class ClassPath {
   // TODO(benyu): Try java.nio.file.Paths#get() when Guava drops JDK 6 support.
   @VisibleForTesting
   static File toFile(URL url) {
-    checkArgument(url.getProtocol().equals("file"));
+    checkArgument("file".equals(url.getProtocol()));
     try {
       return new File(url.toURI()); // Accepts escaped characters like %20.
     } catch (URISyntaxException e) { // URL.toURI() doesn't escape chars.

@@ -65,11 +65,11 @@ public abstract class AbstractInvocationHandler implements InvocationHandler {
     if (args == null) {
       args = NO_ARGS;
     }
-    if (args.length == 0 && method.getName().equals("hashCode")) {
+    if (args.length == 0 && "hashCode".equals(method.getName())) {
       return hashCode();
     }
     if (args.length == 1
-        && method.getName().equals("equals")
+        && "equals".equals(method.getName())
         && method.getParameterTypes()[0] == Object.class) {
       Object arg = args[0];
       if (arg == null) {
@@ -81,7 +81,7 @@ public abstract class AbstractInvocationHandler implements InvocationHandler {
       return isProxyOfSameInterfaces(arg, proxy.getClass())
           && equals(Proxy.getInvocationHandler(arg));
     }
-    if (args.length == 0 && method.getName().equals("toString")) {
+    if (args.length == 0 && "toString".equals(method.getName())) {
       return toString();
     }
     return handleInvocation(proxy, method, args);

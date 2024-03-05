@@ -751,7 +751,7 @@ public final class Files {
         case ".":
           continue;
         case "..":
-          if (path.size() > 0 && !path.get(path.size() - 1).equals("..")) {
+          if (path.size() > 0 && !"..".equals(path.get(path.size() - 1))) {
             path.remove(path.size() - 1);
           } else {
             path.add("..");
@@ -772,7 +772,7 @@ public final class Files {
     while (result.startsWith("/../")) {
       result = result.substring(3);
     }
-    if (result.equals("/..")) {
+    if ("/..".equals(result)) {
       result = "/";
     } else if ("".equals(result)) {
       result = ".";
