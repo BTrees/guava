@@ -20,6 +20,7 @@ import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.caliper.api.SkipThisScenarioException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /** A benchmark that tries invoking {@code Set.contains} on many different sets. */
@@ -48,7 +49,7 @@ public class MultipleSetContainsBenchmark {
       throw new SkipThisScenarioException();
     }
 
-    Random rng = new Random();
+    Random rng = new SecureRandom();
     for (int i = 0; i < 0x1000; i++) {
       double setSize = rng.nextDouble();
       if (setSize < emptySetProportion) {

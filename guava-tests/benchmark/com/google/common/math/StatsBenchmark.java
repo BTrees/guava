@@ -21,6 +21,7 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.caliper.api.SkipThisScenarioException;
 import com.google.common.primitives.Doubles;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -150,7 +151,7 @@ public class StatsBenchmark {
 
   @BeforeExperiment
   void setUp() {
-    Random rng = new Random();
+    Random rng = new SecureRandom();
     for (int i = 0; i < 0x100; i++) {
       values[i] = new double[n];
       for (int j = 0; j < n; j++) {
