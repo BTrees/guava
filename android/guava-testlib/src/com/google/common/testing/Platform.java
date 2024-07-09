@@ -17,6 +17,7 @@
 package com.google.common.testing;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import io.github.pixee.security.ObjectInputFilters;
 import static java.util.Objects.requireNonNull;
 
 import com.google.common.annotations.GwtCompatible;
@@ -43,6 +44,7 @@ final class Platform {
       ObjectOutputStream out = new ObjectOutputStream(bytes);
       out.writeObject(object);
       ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()));
+      ObjectInputFilters.enableObjectFilterIfUnprotected(in);
       return (T) requireNonNull(in.readObject());
     } catch (IOException | ClassNotFoundException e) {
       throw new RuntimeException(e);
