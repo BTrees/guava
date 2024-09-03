@@ -18,6 +18,7 @@ package com.google.common.collect;
 
 import com.google.common.base.Function;
 import com.google.common.primitives.Ints;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
@@ -103,7 +104,7 @@ public class ConcurrentHashMultisetBasherTest extends TestCase {
   private static class MutateTask implements Callable<int[]> {
     private final ConcurrentHashMultiset<String> multiset;
     private final ImmutableList<String> keys;
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     private MutateTask(ConcurrentHashMultiset<String> multiset, ImmutableList<String> keys) {
       this.multiset = multiset;

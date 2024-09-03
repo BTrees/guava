@@ -20,6 +20,7 @@ import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.common.base.Preconditions;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -43,7 +44,7 @@ public class MultisetIteratorBenchmark {
     linkedHashMultiset = LinkedHashMultiset.create(size);
     treeMultiset = TreeMultiset.create();
 
-    Random random = new Random();
+    Random random = new SecureRandom();
 
     int sizeRemaining = size;
 

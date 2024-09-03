@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /** Benchmark for {@code BaseEncoding} performance. */
@@ -53,7 +54,7 @@ public class BaseEncodingBenchmark {
 
   @BeforeExperiment
   public void setUp() {
-    Random rng = new Random();
+    Random rng = new SecureRandom();
     for (int i = 0; i < encodingInputs.length; i++) {
       encodingInputs[i] = new byte[n];
       rng.nextBytes(encodingInputs[i]);

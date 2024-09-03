@@ -21,6 +21,7 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.common.base.BenchmarkHelpers.SampleMatcherConfig;
 import com.google.common.collect.Lists;
+import java.security.SecureRandom;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
@@ -81,7 +82,7 @@ public class CharMatcherBenchmark {
       int matchedCharCount = tmp.cardinality();
       this.matcher = SmallCharMatcher.from(tmp, "");
     }
-    this.string = checkString(length, percent, config.matchingChars, new Random(), forceSlow, web);
+    this.string = checkString(length, percent, config.matchingChars, new SecureRandom(), forceSlow, web);
   }
 
   // Caliper recognizes int-parameter methods beginning with "time"

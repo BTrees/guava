@@ -17,6 +17,7 @@
 package com.google.common.io;
 
 import static com.google.common.truth.Truth.assertThat;
+import java.security.SecureRandom;
 import static org.junit.Assert.assertThrows;
 
 import com.google.common.base.Charsets;
@@ -524,7 +525,7 @@ public class FilesTest extends IoTestCase {
     File file = createTempFile();
     Files.write(bytes, file);
 
-    Random random = new Random();
+    Random random = new SecureRandom();
     random.nextBytes(expectedBytes);
 
     // Test

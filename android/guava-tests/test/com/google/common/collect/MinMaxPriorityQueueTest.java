@@ -30,6 +30,7 @@ import com.google.common.collect.testing.TestStringQueueGenerator;
 import com.google.common.collect.testing.features.CollectionFeature;
 import com.google.common.collect.testing.features.CollectionSize;
 import com.google.common.testing.NullPointerTester;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -538,7 +539,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
   }
 
   public void testRemoveAt() {
-    long seed = new Random().nextLong();
+    long seed = new SecureRandom().nextLong();
     Random random = new Random(seed);
     int heapSize = 999;
     int numberOfModifications = reduceIterationsIfGwt(500);
@@ -609,7 +610,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   public void testCorrectOrdering_mediumHeapsPollFirst() {
     for (int attempts = 0; attempts < reduceIterationsIfGwt(5000); attempts++) {
-      int size = new Random().nextInt(256) + 16;
+      int size = new SecureRandom().nextInt(256) + 16;
       ArrayList<Integer> elements = createOrderedList(size);
       List<Integer> expected = ImmutableList.copyOf(elements);
       MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create();
@@ -639,7 +640,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   public void testCorrectOrdering_mediumHeapsPollLast() {
     for (int attempts = 0; attempts < reduceIterationsIfGwt(5000); attempts++) {
-      int size = new Random().nextInt(256) + 16;
+      int size = new SecureRandom().nextInt(256) + 16;
       ArrayList<Integer> elements = createOrderedList(size);
       List<Integer> expected = ImmutableList.copyOf(elements);
       MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create();
@@ -652,7 +653,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
   }
 
   public void testCorrectOrdering_randomAccess() {
-    long seed = new Random().nextLong();
+    long seed = new SecureRandom().nextLong();
     Random random = new Random(seed);
     PriorityQueue<Integer> control = new PriorityQueue<>();
     MinMaxPriorityQueue<Integer> q = MinMaxPriorityQueue.create();
@@ -819,7 +820,7 @@ public class MinMaxPriorityQueueTest extends TestCase {
 
   /** Returns the seed used for the randomization. */
   private long insertRandomly(ArrayList<Integer> elements, MinMaxPriorityQueue<Integer> q) {
-    long seed = new Random().nextLong();
+    long seed = new SecureRandom().nextLong();
     Random random = new Random(seed);
     insertRandomly(elements, q, random);
     return seed;

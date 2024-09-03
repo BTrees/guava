@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableSet;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -55,7 +56,7 @@ public final class TestByteSource extends ByteSource implements TestStreamSuppli
   @Override
   public InputStream openStream() throws IOException {
     inputStreamOpened = true;
-    return new RandomAmountInputStream(new In(), new Random());
+    return new RandomAmountInputStream(new In(), new SecureRandom());
   }
 
   private final class In extends TestInputStream {
