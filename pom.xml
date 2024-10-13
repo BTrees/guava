@@ -31,6 +31,7 @@
     <otherVariant.version>HEAD-android-SNAPSHOT</otherVariant.version>
     <otherVariant.jvmEnvironment>android</otherVariant.jvmEnvironment>
     <otherVariant.jvmEnvironmentVariantName>android</otherVariant.jvmEnvironmentVariantName>
+    <versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
   </properties>
   <issueManagement>
     <system>GitHub Issues</system>
@@ -311,6 +312,12 @@
       We could probably have resumed it after https://github.com/google/guava/pull/6664.
       But it's always weird that published poms reference test-only libraries at all, so I'm not in any rush to do so.
       -->
+      <dependency>
+        <groupId>io.github.pixee</groupId>
+        <artifactId>java-security-toolkit</artifactId>
+        
+        <version>${versions.java-security-toolkit}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <profiles>
