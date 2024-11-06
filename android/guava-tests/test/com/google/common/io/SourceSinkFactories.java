@@ -35,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.CharBuffer;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.logging.Logger;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -263,7 +264,7 @@ public class SourceSinkFactories {
     private final ThreadLocal<File> fileThreadLocal = new ThreadLocal<>();
 
     protected File createFile() throws IOException {
-      File file = File.createTempFile("SinkSourceFile", "txt");
+      File file = Files.createTempFile("SinkSourceFile", "txt").toFile();
       fileThreadLocal.set(file);
       return file;
     }
