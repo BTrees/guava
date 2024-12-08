@@ -23,6 +23,7 @@ import static com.google.common.cache.TestingRemovalListeners.nullRemovalListene
 import static com.google.common.cache.TestingRemovalListeners.queuingRemovalListener;
 import static com.google.common.cache.TestingWeighers.constantWeigher;
 import static com.google.common.truth.Truth.assertThat;
+import java.security.SecureRandom;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -502,7 +503,7 @@ public class CacheBuilderTest extends TestCase {
     int nThreads = 100;
     final int getsPerTask = 1000;
     final int nUniqueKeys = 10000;
-    final Random random = new Random(); // Randoms.insecureRandom();
+    final Random random = new SecureRandom(); // Randoms.insecureRandom();
 
     QueuingRemovalListener<String, String> removalListener = queuingRemovalListener();
     final AtomicInteger computeCount = new AtomicInteger();

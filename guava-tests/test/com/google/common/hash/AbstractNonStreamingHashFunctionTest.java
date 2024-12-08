@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.hash.HashTestUtils.RandomHasherAction;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -54,28 +55,28 @@ public class AbstractNonStreamingHashFunctionTest extends TestCase {
   public void testPutStringWithLowSurrogate() {
     // we pad because the dummy hash function we use to test this, merely copies the input into
     // the output, so the input must be at least 32 bits, since the output has to be that long
-    assertPutString(new char[] {'p', HashTestUtils.randomLowSurrogate(new Random())});
+    assertPutString(new char[] {'p', HashTestUtils.randomLowSurrogate(new SecureRandom())});
   }
 
   public void testPutStringWithHighSurrogate() {
     // we pad because the dummy hash function we use to test this, merely copies the input into
     // the output, so the input must be at least 32 bits, since the output has to be that long
-    assertPutString(new char[] {'p', HashTestUtils.randomHighSurrogate(new Random())});
+    assertPutString(new char[] {'p', HashTestUtils.randomHighSurrogate(new SecureRandom())});
   }
 
   public void testPutStringWithLowHighSurrogate() {
     assertPutString(
         new char[] {
-          HashTestUtils.randomLowSurrogate(new Random()),
-          HashTestUtils.randomHighSurrogate(new Random())
+          HashTestUtils.randomLowSurrogate(new SecureRandom()),
+          HashTestUtils.randomHighSurrogate(new SecureRandom())
         });
   }
 
   public void testPutStringWithHighLowSurrogate() {
     assertPutString(
         new char[] {
-          HashTestUtils.randomHighSurrogate(new Random()),
-          HashTestUtils.randomLowSurrogate(new Random())
+          HashTestUtils.randomHighSurrogate(new SecureRandom()),
+          HashTestUtils.randomLowSurrogate(new SecureRandom())
         });
   }
 
