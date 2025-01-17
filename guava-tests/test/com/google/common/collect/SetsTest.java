@@ -25,6 +25,7 @@ import static com.google.common.collect.Sets.unmodifiableNavigableSet;
 import static com.google.common.collect.testing.IteratorFeature.UNMODIFIABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
+import io.github.pixee.security.ObjectInputFilters;
 import static java.io.ObjectStreamConstants.TC_REFERENCE;
 import static java.io.ObjectStreamConstants.baseWireHandle;
 import static java.util.Collections.emptySet;
@@ -399,6 +400,7 @@ public class SetsTest extends TestCase {
     int handleOffset = 6;
     byte[] serializedForm = serializeWithBackReference(original, handleOffset);
     ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(serializedForm));
+    ObjectInputFilters.enableObjectFilterIfUnprotected(in);
 
     ImmutableSet<?> deserialized = (ImmutableSet<?>) in.readObject();
     EnumSet<?> delegate = (EnumSet<?>) in.readObject();
