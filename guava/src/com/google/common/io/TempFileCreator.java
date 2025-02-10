@@ -17,6 +17,7 @@ package com.google.common.io;
 import static com.google.common.base.StandardSystemProperty.JAVA_IO_TMPDIR;
 import static com.google.common.base.StandardSystemProperty.USER_NAME;
 import static com.google.common.base.Throwables.throwIfUnchecked;
+import java.nio.file.Files;
 import static java.nio.file.attribute.AclEntryFlag.DIRECTORY_INHERIT;
 import static java.nio.file.attribute.AclEntryFlag.FILE_INHERIT;
 import static java.nio.file.attribute.AclEntryType.ALLOW;
@@ -282,10 +283,7 @@ abstract class TempFileCreator {
 
     @Override
     File createTempFile(String prefix) throws IOException {
-      return File.createTempFile(
-          /* prefix= */ prefix,
-          /* suffix= */ null,
-          /* directory= */ null /* defaults to java.io.tmpdir */);
+      return Files.createTempFile(null.toPath(), prefix, null).toFile();
     }
 
     /** Maximum loop count when creating temp directories. */

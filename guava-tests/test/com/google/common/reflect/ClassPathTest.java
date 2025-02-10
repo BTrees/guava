@@ -21,6 +21,7 @@ import static com.google.common.base.StandardSystemProperty.OS_NAME;
 import static com.google.common.base.StandardSystemProperty.PATH_SEPARATOR;
 import static com.google.common.io.MoreFiles.deleteRecursively;
 import static com.google.common.truth.Truth.assertThat;
+import java.nio.file.Files;
 import static java.nio.file.Files.createDirectory;
 import static java.nio.file.Files.createFile;
 import static java.nio.file.Files.createSymbolicLink;
@@ -188,7 +189,7 @@ public class ClassPathTest extends TestCase {
   @AndroidIncompatible // ClassPath is documented as not supporting Android
 
   public void testScan_classPathCycle() throws IOException {
-    File jarFile = File.createTempFile("with_circular_class_path", ".jar");
+    File jarFile = Files.createTempFile("with_circular_class_path", ".jar").toFile();
     try {
       writeSelfReferencingJarFile(jarFile, "test.txt");
       assertThat(
@@ -272,7 +273,7 @@ public class ClassPathTest extends TestCase {
 
   public void testScanFromFile_notJarFile() throws IOException {
     ClassLoader classLoader = ClassPathTest.class.getClassLoader();
-    File notJar = File.createTempFile("not_a_jar", "txt");
+    File notJar = Files.createTempFile("not_a_jar", "txt").toFile();
     try {
       assertThat(new ClassPath.LocationInfo(notJar, classLoader).scanResources()).isEmpty();
     } finally {
