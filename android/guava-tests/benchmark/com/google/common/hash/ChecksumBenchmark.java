@@ -19,6 +19,7 @@ package com.google.common.hash;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.zip.Adler32;
 import java.util.zip.CRC32;
@@ -38,7 +39,7 @@ import java.util.zip.Checksum;
 public class ChecksumBenchmark {
 
   // Use a constant seed for all of the benchmarks to ensure apples to apples comparisons.
-  private static final int RANDOM_SEED = new Random().nextInt();
+  private static final int RANDOM_SEED = new SecureRandom().nextInt();
 
   @Param({"10", "1000", "100000", "1000000"})
   private int size;

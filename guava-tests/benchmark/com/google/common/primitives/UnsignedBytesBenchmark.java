@@ -19,6 +19,7 @@ package com.google.common.primitives;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
@@ -44,7 +45,7 @@ public class UnsignedBytesBenchmark {
 
   @BeforeExperiment
   void setUp() throws Exception {
-    Random r = new Random();
+    Random r = new SecureRandom();
     ba1 = new byte[length];
     r.nextBytes(ba1);
     ba2 = Arrays.copyOf(ba1, ba1.length);

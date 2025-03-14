@@ -18,6 +18,7 @@ package com.google.common.hash;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.truth.Truth.assertThat;
+import java.security.SecureRandom;
 import static org.junit.Assert.assertThrows;
 
 import com.google.common.base.Stopwatch;
@@ -51,7 +52,7 @@ public class BloomFilterTest extends TestCase {
       new ThreadLocal<Random>() {
         @Override
         protected Random initialValue() {
-          return new Random();
+          return new SecureRandom();
         }
       };
 

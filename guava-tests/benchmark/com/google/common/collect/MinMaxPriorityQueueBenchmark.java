@@ -21,6 +21,7 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import com.google.common.base.Function;
 import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -44,7 +45,7 @@ public class MinMaxPriorityQueueBenchmark {
 
   private Queue<Integer> queue;
 
-  private final Random random = new Random();
+  private final Random random = new SecureRandom();
 
   @BeforeExperiment
   void setUp() {
