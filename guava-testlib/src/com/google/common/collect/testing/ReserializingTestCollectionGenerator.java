@@ -17,6 +17,7 @@
 package com.google.common.collect.testing;
 
 import com.google.common.annotations.GwtIncompatible;
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -57,6 +58,7 @@ public class ReserializingTestCollectionGenerator<E> implements TestCollectionGe
       ObjectOutputStream out = new ObjectOutputStream(bytes);
       out.writeObject(object);
       ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()));
+      ObjectInputFilters.enableObjectFilterIfUnprotected(in);
       return (T) in.readObject();
     } catch (IOException | ClassNotFoundException e) {
       Helpers.fail(e, e.getMessage());

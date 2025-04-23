@@ -15,6 +15,7 @@
 
 package com.google.common.util.concurrent;
 
+import io.github.pixee.security.ObjectInputFilters;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
@@ -1168,6 +1169,7 @@ abstract class JSR166TestCase extends TestCase {
       oos.flush();
       oos.close();
       ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
+      ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
       T clone = (T) ois.readObject();
       assertSame(o.getClass(), clone.getClass());
       return clone;

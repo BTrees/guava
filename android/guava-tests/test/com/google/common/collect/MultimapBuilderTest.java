@@ -19,6 +19,7 @@ package com.google.common.collect;
 import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.collect.MultimapBuilder.MultimapBuilderWithKeys;
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -104,6 +105,6 @@ public class MultimapBuilderTest extends TestCase {
   private static Object reserialize(Object object) throws Exception {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     new ObjectOutputStream(bytes).writeObject(object);
-    return new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray())).readObject();
+    return createSafeObjectInputStream(new ByteArrayInputStream(bytes.toByteArray())).readObject();
   }
 }
