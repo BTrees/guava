@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -111,7 +112,7 @@ public abstract class IoTestCase extends TestCase {
    * deleted in the tear-down for this test.
    */
   protected final File createTempDir() throws IOException {
-    File tempFile = File.createTempFile("IoTestCase", "");
+    File tempFile = Files.createTempFile("IoTestCase", "").toFile();
     if (!tempFile.delete() || !tempFile.mkdir()) {
       throw new IOException("failed to create temp dir");
     }
@@ -137,7 +138,7 @@ public abstract class IoTestCase extends TestCase {
    * be deleted in the tear-down for this test.
    */
   protected final File createTempFile() throws IOException {
-    return File.createTempFile("test", null, getTempDir());
+    return Files.createTempFile(getTempDir().toPath(), "test", null).toFile();
   }
 
   /** Returns a byte array of length size that has values 0 .. size - 1. */

@@ -41,6 +41,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.security.Permission;
 import java.security.PermissionCollection;
 import java.util.jar.Attributes;
@@ -182,7 +183,7 @@ public class ClassPathTest extends TestCase {
   @AndroidIncompatible // ClassPath is documented as not supporting Android
 
   public void testScan_classPathCycle() throws IOException {
-    File jarFile = File.createTempFile("with_circular_class_path", ".jar");
+    File jarFile = Files.createTempFile("with_circular_class_path", ".jar").toFile();
     try {
       writeSelfReferencingJarFile(jarFile, "test.txt");
       assertThat(
@@ -207,7 +208,7 @@ public class ClassPathTest extends TestCase {
 
   public void testScanFromFile_notJarFile() throws IOException {
     ClassLoader classLoader = ClassPathTest.class.getClassLoader();
-    File notJar = File.createTempFile("not_a_jar", "txt");
+    File notJar = Files.createTempFile("not_a_jar", "txt").toFile();
     try {
       assertThat(new ClassPath.LocationInfo(notJar, classLoader).scanResources()).isEmpty();
     } finally {
