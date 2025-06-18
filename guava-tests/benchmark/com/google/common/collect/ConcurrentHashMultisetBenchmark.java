@@ -25,6 +25,7 @@ import com.google.caliper.Param;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.primitives.Ints;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import java.security.SecureRandom;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -106,7 +107,7 @@ public class ConcurrentHashMultisetBenchmark {
   }
 
   private long runAddSingleThread(int reps) {
-    Random random = new Random();
+    Random random = new SecureRandom();
     int nKeys = keys.size();
     long blah = 0;
     for (int i = 0; i < reps; i++) {
@@ -119,7 +120,7 @@ public class ConcurrentHashMultisetBenchmark {
   }
 
   private long runAddRemoveSingleThread(int reps) {
-    Random random = new Random();
+    Random random = new SecureRandom();
     int nKeys = keys.size();
     long blah = 0;
     for (int i = 0; i < reps; i++) {

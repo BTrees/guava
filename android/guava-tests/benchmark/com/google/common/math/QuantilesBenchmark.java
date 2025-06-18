@@ -23,6 +23,7 @@ import com.google.common.collect.ContiguousSet;
 import com.google.common.collect.DiscreteDomain;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Range;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /** Benchmarks some algorithms providing the same functionality as {@link Quantiles}. */
@@ -40,7 +41,7 @@ public class QuantilesBenchmark {
 
   @BeforeExperiment
   void setUp() {
-    Random rng = new Random();
+    Random rng = new SecureRandom();
     for (int i = 0; i < 0x100; i++) {
       datasets[i] = new double[datasetSize];
       for (int j = 0; j < datasetSize; j++) {

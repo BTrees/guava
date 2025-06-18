@@ -18,6 +18,7 @@ package com.google.common.util.concurrent;
 
 import com.google.common.testing.NullPointerTester;
 import com.google.common.testing.TearDownStack;
+import java.security.SecureRandom;
 import java.util.Random;
 import junit.framework.TestCase;
 
@@ -58,7 +59,7 @@ public abstract class MonitorTestCase extends TestCase {
 
   @Override
   protected final void setUp() throws Exception {
-    boolean fair = new Random().nextBoolean();
+    boolean fair = new SecureRandom().nextBoolean();
     monitor = new Monitor(fair);
     tearDownStack.addTearDown(thread1 = new TestThread<>(monitor, "TestThread #1"));
     tearDownStack.addTearDown(thread2 = new TestThread<>(monitor, "TestThread #2"));

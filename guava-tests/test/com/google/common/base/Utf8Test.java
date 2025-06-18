@@ -28,6 +28,7 @@ import com.google.common.annotations.GwtCompatible;
 import com.google.common.annotations.GwtIncompatible;
 import com.google.common.annotations.J2ktIncompatible;
 import com.google.common.collect.ImmutableList;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
@@ -90,7 +91,7 @@ public class Utf8Test extends TestCase {
 
     Integer[] codePoints = utf8Lengths.keySet().toArray(new Integer[] {});
     StringBuilder sb = new StringBuilder();
-    Random rnd = new Random();
+    Random rnd = new SecureRandom();
     for (int trial = 0; trial < 100; trial++) {
       sb.setLength(0);
       int utf8Length = 0;

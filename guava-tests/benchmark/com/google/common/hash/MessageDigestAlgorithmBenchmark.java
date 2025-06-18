@@ -21,6 +21,7 @@ import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -99,7 +100,7 @@ public class MessageDigestAlgorithmBenchmark {
   }
 
   // Use a constant seed for all of the benchmarks to ensure apples to apples comparisons.
-  private static final int RANDOM_SEED = new Random().nextInt();
+  private static final int RANDOM_SEED = new SecureRandom().nextInt();
 
   private byte[] testBytes;
 

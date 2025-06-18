@@ -28,6 +28,7 @@ import static com.google.common.cache.TestingWeighers.constantWeigher;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.immutableEntry;
 import static com.google.common.truth.Truth.assertThat;
+import java.security.SecureRandom;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -582,7 +583,7 @@ public class LocalCacheTest extends TestCase {
       assertTrue(segment.recencyQueue.isEmpty());
 
       // access some of the elements
-      Random random = new Random();
+      Random random = new SecureRandom();
       List<ReferenceEntry<Object, Object>> reads = Lists.newArrayList();
       Iterator<ReferenceEntry<Object, Object>> i = readOrder.iterator();
       while (i.hasNext()) {
@@ -2095,7 +2096,7 @@ public class LocalCacheTest extends TestCase {
       checkExpirationTimes(map);
 
       // access some of the elements
-      Random random = new Random();
+      Random random = new SecureRandom();
       List<ReferenceEntry<Object, Object>> reads = Lists.newArrayList();
       Iterator<ReferenceEntry<Object, Object>> i = readOrder.iterator();
       while (i.hasNext()) {
@@ -2136,7 +2137,7 @@ public class LocalCacheTest extends TestCase {
       assertTrue(segment.recencyQueue.isEmpty());
 
       // access some of the elements
-      Random random = new Random();
+      Random random = new SecureRandom();
       List<ReferenceEntry<Object, Object>> reads = Lists.newArrayList();
       Iterator<ReferenceEntry<Object, Object>> i = readOrder.iterator();
       while (i.hasNext()) {
@@ -2177,7 +2178,7 @@ public class LocalCacheTest extends TestCase {
       checkExpirationTimes(map);
 
       // access some of the elements
-      Random random = new Random();
+      Random random = new SecureRandom();
       List<ReferenceEntry<Object, Object>> writes = Lists.newArrayList();
       Iterator<ReferenceEntry<Object, Object>> i = writeOrder.iterator();
       while (i.hasNext()) {

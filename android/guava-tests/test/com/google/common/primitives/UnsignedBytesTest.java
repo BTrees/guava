@@ -18,6 +18,7 @@ package com.google.common.primitives;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
+import java.security.SecureRandom;
 import static org.junit.Assert.assertThrows;
 
 import com.google.common.collect.testing.Helpers;
@@ -276,7 +277,7 @@ public class UnsignedBytesTest extends TestCase {
 
   @SuppressWarnings("unchecked")
   public void testLexicographicalComparatorLongInputs() {
-    Random rnd = new Random();
+    Random rnd = new SecureRandom();
     for (Comparator<byte[]> comparator :
         Arrays.asList(
             UnsignedBytes.lexicographicalComparator(),

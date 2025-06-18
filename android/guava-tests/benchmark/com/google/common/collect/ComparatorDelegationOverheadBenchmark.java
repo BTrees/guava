@@ -17,6 +17,7 @@ package com.google.common.collect;
 import com.google.caliper.BeforeExperiment;
 import com.google.caliper.Benchmark;
 import com.google.caliper.Param;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
@@ -36,7 +37,7 @@ public class ComparatorDelegationOverheadBenchmark {
 
   @BeforeExperiment
   void setUp() throws Exception {
-    Random rng = new Random();
+    Random rng = new SecureRandom();
     for (int i = 0; i < 0x100; i++) {
       Integer[] array = new Integer[n];
       for (int j = 0; j < n; j++) {
