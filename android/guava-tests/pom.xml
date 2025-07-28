@@ -63,7 +63,11 @@
       <version>1.0-beta-3</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+  <dependency>
+   <groupId>io.github.pixee</groupId>
+   <artifactId>java-security-toolkit</artifactId>
+  </dependency>
+ </dependencies>
   <build>
     <plugins>
       <plugin>
